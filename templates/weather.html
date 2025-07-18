@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Live Weather</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+  <body>
+
+    <div class="searchBar">
+        <div class=" searchBarBox">
+            <input type="text" class="inputfield" placeholder="Search City">
+            <i class="fa-solid fa-magnifying-glass searchIcon fa-lg " onclick="fetchData()" style="color: #eaf4f4;"></i>
+        </div>
+    </div>
+
+    <div class="mainContentParent d-flex">
+        <div class="left">
+            <div class="temp currTemp d-flex flex-column gap-2 p-3 ">
+                <p id="cityName" class="fs-5">City Name</p>
+                <h6 class="fs-1 fw-bold"><span id="cityTemp">0</span> &deg;C</h6>
+                <p id="skyDesc" class="fst-italic"> Sky Description</p>
+                <hr class="line">
+
+                <div class="d-flex gap-2">
+                    <div><i class="fa-solid fa-calendar-days"></i></div>
+                    <p id="date">Date</p>
+                </div>
+                <div class="d-flex gap-2">
+                    <div><i class="fa-solid fa-clock"></i></div>
+                    <p id="time">Time</p>
+                </div>
+            </div>
+
+
+            <div class="temp nextTemp p-3 d-flex flex-column gap-3">
+                <h6 class="fs-4">5-Days Forecast</h6>
+
+
+<div class="d-flex flex-column gap-2" id="forecastContainer">
+
+  <div class="forecastRow d-flex align-items-center justify-content-between">
+    <!-- Day and Date -->
+    <div class="d-flex flex-column text-start" style="width: 100px;">
+      <h6 class="mb-0">Friday</h6>
+      <small class="text-muted">06/06/2025</small>
+    </div>
+
+    <!-- Icon and Rain Info -->
+    <div class="d-flex align-items-center gap-2" style="width: 160px;">
+      <img src="./sunny.svg" alt="cloudy" width="25px">
+      <small class="text-muted">No rain (0%)</small>
+    </div>
+
+    <!-- Temperature -->
+    <div class="text-end" style="width: 60px;">
+      <h6 class="mb-0">30 &deg;C</h6>
+    </div>
+  </div>
+
+  <div class="forecastRow d-flex align-items-center justify-content-between">
+    <div class="d-flex flex-column text-start" style="width: 100px;">
+      <h6 class="mb-0">Saturday</h6>
+      <small class="text-muted">07/06/2025</small>
+    </div>
+    <div class="d-flex align-items-center gap-2" style="width: 160px;">
+      <img src="./sunny.svg" alt="rain" width="25px">
+      <small class="text-muted">Rain: 1.4 mm (45%)</small>
+    </div>
+    <div class="text-end" style="width: 60px;">
+      <h6 class="mb-0">33 &deg;C</h6>
+    </div>
+  </div>
+
+    <div class="forecastRow d-flex align-items-center justify-content-between">
+    <div class="d-flex flex-column text-start" style="width: 100px;">
+      <h6 class="mb-0">Saturday</h6>
+      <small class="text-muted">07/06/2025</small>
+    </div>
+    <div class="d-flex align-items-center gap-2" style="width: 160px;">
+      <img src="./sunny.svg" alt="rain" width="25px">
+      <small class="text-muted">Rain: 1.4 mm (45%)</small>
+    </div>
+    <div class="text-end" style="width: 60px;">
+      <h6 class="mb-0">33 &deg;C</h6>
+    </div>
+  </div>
+
+    <div class="forecastRow d-flex align-items-center justify-content-between">
+    <div class="d-flex flex-column text-start" style="width: 100px;">
+      <h6 class="mb-0">Saturday</h6>
+      <small class="text-muted">07/06/2025</small>
+    </div>
+    <div class="d-flex align-items-center gap-2" style="width: 160px;">
+      <img src="./sunny.svg" alt="rain" width="25px">
+      <small class="text-muted">Rain: 1.4 mm (45%)</small>
+    </div>
+    <div class="text-end" style="width: 60px;">
+      <h6 class="mb-0">33 &deg;C</h6>
+    </div>
+  </div>
+
+    <div class="forecastRow d-flex align-items-center justify-content-between">
+    <div class="d-flex flex-column text-start" style="width: 100px;">
+      <h6 class="mb-0">Saturday</h6>
+      <small class="text-muted">07/06/2025</small>
+    </div>
+    <div class="d-flex align-items-center gap-2" style="width: 160px;">
+      <img src="./sunny.svg" alt="rain" width="25px">
+      <small class="text-muted">Rain: 1.4 mm (45%)</small>
+    </div>
+    <div class="text-end" style="width: 60px;">
+      <h6 class="mb-0">33 &deg;C</h6>
+    </div>
+  </div>
+  
+</div>
+                
+            </div>
+        
+
+        
+        </div>
+
+
+        <div class="right">
+
+            <div class="rightRow rowOne">
+
+                <div class="rowOneChild d-flex gap-2 align-items-center">
+                    <!-- <img src="./feels.svg" alt="" width="35px"> -->
+                    <img src="{{ url_for('static', filename='images/feels.svg') }}" alt="Logo" style="width: 35px;">
+
+                    <div>
+                        <h6 class="fs-4"><span id="feels">0</span> &deg;C</h6>
+                        <p>Feels Like</p>
+                    </div>
+
+                </div>
+
+                <div class="rowOneChild d-flex gap-3 align-items-center">
+                    <!-- <img src="./humidity.svg" alt="" width="35px"> -->
+                    <img src="{{ url_for('static', filename='images/humidity.svg') }}" alt="Logo" style="width: 35px;">
+
+                    <div>
+                        <h6 class="fs-4"> <span id="humid">0</span> %</h6>
+                        <p>Humidity</p>
+                    </div>
+
+                </div>
+
+                <div class="rowOneChild d-flex gap-2 align-items-center">
+                    <!-- <img src="./pressure.svg" alt="" width="35px"> -->/
+                    <img src="{{ url_for('static', filename='images/pressure.svg') }}" alt="Logo" style="width: 35px;">
+
+                    <div>
+                        <h6 class="fs-4"><span id="press">0</span> mb</h6>
+                        <p>Pressure</p>
+                    </div>
+
+                </div>
+
+                <div class="rowOneChild d-flex gap-2 align-items-center">
+                    <!-- <img src="./wind.svg" alt="" width="35px"> -->
+                    <img src="{{ url_for('static', filename='images/wind.svg') }}" alt="Logo" style="width: 35px;">
+
+                    <div>
+                        <h6 class="fs-4"><span id="wind">0</span> kmph</h6>
+                        <p>Wind</p>
+                    </div>
+
+                </div>
+
+     
+
+
+            </div>
+
+
+            <div class="rightRow rowTwo">
+
+                <div class="rowTwoChild d-flex flex-column justify-content-center gap-4" id="r2c1">
+                    <div class="airquality d-flex align-items-center justify-content-between">
+                        <h6 class="fs-4">Air Quality Index (AQI)</h6>
+                        <h6 class="fs-1 fw-bold" id="aqi_val">50</h6>
+                        <h6 class="pe-5 d-flex align-items-center">Air Quality is <span id="aq" class="fs-4 ps-3">GOOD</span></h6>
+                    </div>
+                    
+                    <div class="aqi d-flex flex-column gap-2">
+                        
+                        <div class="aqirow">
+
+                            <div class="pollutant border-start border-3 border-danger">
+                                <div class="pol">
+                                    <!-- <img src="./pm2_5.png" alt="" width="40px"> -->
+                                    <img src="{{ url_for('static', filename='images/pm2_5.png') }}" alt="Logo" style="width: 40px;">
+
+                                    <div class="polName">
+                                        <h6>Particulate Matter</h6>
+                                        <h6>(PM2.5)</h6>
+                                    </div>
+                                </div>
+                                <div class="polValue">
+                                    <h6 class="fs-6" id="pm2">36</h6>
+                                    <h6>µg/m³</h6>
+                                </div>
+                            </div>
+
+                            <div class="pollutant border-start border-3 border-warning">
+                                <div class="pol">
+                                    <!-- <img src="./pm10.png" alt="" width="40px"> -->
+                                    <img src="{{ url_for('static', filename='images/pm10.png') }}" alt="Logo" style="width: 40px;">
+
+                                    <div class="polName">
+                                        <h6>Particulate Matter</h6>
+                                        <h6>(PM10)</h6>
+                                    </div>
+                                </div>
+                                <div class="polValue">
+                                    <h6 class="fs-6" id="pm10">86</h6>
+                                    <h6>µg/m³</h6>
+                                </div>
+                            </div>
+
+                            <div class="pollutant border-start border-3 border-success">
+                                <div class="pol">
+                                    <!-- <img src="./co.png" alt="" width=40px"> -->
+                                    <img src="{{ url_for('static', filename='images/co.png') }}" alt="Logo" style="width: 40px;">
+
+                                    <div class="polName">
+                                        <h6>Carbon Monoxide</h6>
+                                        <h6>(CO)</h6>
+                                    </div>
+                                </div>
+                                <div class="polValue">
+                                    <h6 class="fs-6" id="co">435</h6>
+                                    <h6>ppb</h6>
+                                </div>
+                            </div>   
+
+                        </div>
+
+                        <div class="aqirow">
+
+                            <div class="pollutant border-start border-3 border-danger">
+                                <div class="pol">
+                                    <!-- <img src="./so2.png" alt="" width="40px"> -->
+                                    <img src="{{ url_for('static', filename='images/so2.png') }}" alt="Logo" style="width: 40px;">
+
+                                    <div class="polName">
+                                        <h6>Sulfur Dioxide</h6>
+                                        <h6>(SO2)</h6>
+                                    </div>
+                                </div>
+
+                                <div class="polValue">
+                                    <h6 class="fs-6" id="so2">4</h6>
+                                    <h6>ppb</h6>
+                                </div>
+                            </div>
+
+                            <div class="pollutant border-start border-3 border-warning">
+                                <div class="pol">
+                                    <!-- <img src="./no2.png" alt="" width="40px"> -->
+                                    <img src="{{ url_for('static', filename='images/no2.png') }}" alt="Logo" style="width: 40px;">
+
+                                    <div class="polName">
+                                        <h6>Nitrogen Dioxide</h6>
+                                        <h6>(NO2)</h6>
+                                    </div>
+                                </div>
+                                <div class="polValue">
+                                    <h6 class="fs-6" id="no2">8</h6>
+                                    <h6>ppb</h6>
+                                </div>
+                            </div>
+
+                            <div class="pollutant border-start border-3 border-success">
+                                <div class="pol">
+                                    <!-- <img src="./o3.png" alt="" width="40px"> -->
+                                    <img src="{{ url_for('static', filename='images/o3.png') }}" alt="Logo" style="width: 40px;">
+
+                                    <div class="polName">
+                                        <h6>Ozone</h6>
+                                        <h6>(O3)</h6>
+                                    </div>
+                                </div>
+                                <div class="polValue">
+                                    <h6 class="fs-6" id="o3">13</h6>
+                                    <h6>ppb</h6>
+                                </div>
+                            </div>
+                        
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="rowTwoChild d-flex flex-column gap-4 justify-content-center" id="r2c2">
+                    <h6> Sunrise & Sunset</h6>
+
+                    <div class="d-flex flex-column justify-content-around gap-3" id="srss">
+                        <div class="sunrise d-flex gap-3">
+                            <!-- <img src="./sunrise.svg" alt="" width="40px"> -->
+                             <img src="{{ url_for('static', filename='images/sunrise.svg') }}" alt="Logo" style="width: 35px;">
+
+                            <div>
+                                <p>Sunrise</p>
+                                <h6 id="srTime" class="fs-5">6:00 AM</h6>
+                            </div>
+                        </div>
+                        <div class="sunset d-flex gap-3">
+                            <!-- <img src="./sunset.svg" alt="" width="40px"> -->
+                             <img src="{{ url_for('static', filename='images/sunset.svg') }}" alt="Logo" style="width: 35px;">
+                             
+                            <div>
+                                <p>Sunset</p>
+                                <h6 id="ssTime" class="fs-5">7:00 PM</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+            <div class="rightRow rowThree d-flex gap-3">
+                <h6 class="fs-4 ms-4">Hourly Weather</h6>
+                <div class="todayTempParent">
+
+                    <div class="todayTemp ">
+                        <h6>9 Am</h6>
+                        <img src="./sunny.svg" alt="" width="30px">
+                        <h6>20 &deg;C</h6>
+                    </div>
+
+                    <div class="todayTemp">
+                        <h6>9 Am</h6>
+                        <img src="./sunny.svg" alt="" width="30px">
+                        <h6>20 &deg;C</h6>
+                    </div>
+
+                    <div class="todayTemp">
+                        <h6>9 Am</h6>
+                        <img src="./sunny.svg" alt="" width="30px">
+                        <h6>20 &deg;C</h6>
+                    </div>
+
+                    <div class="todayTemp">
+                        <h6>9 Am</h6>
+                        <img src="./sunny.svg" alt="" width="30px">
+                        <h6>20 &deg;C</h6>
+                    </div>
+
+                    <div class="todayTemp">
+                        <h6>9 Am</h6>
+                        <img src="./sunny.svg" alt="" width="30px">
+                        <h6>20 &deg;C</h6>
+                    </div>
+
+                    <div class="todayTemp">
+                        <h6>9 Am</h6>
+                        <img src="./sunny.svg" alt="" width="30px">
+                        <h6>20 &deg;C</h6>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js" integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>  
+
+<script>
+
+    function formatDate(timestamp) {
+        const date = new Date(timestamp * 1000);
+        const options = { day: '2-digit', month: 'long', year: 'numeric' };
+        return date.toLocaleDateString('en-GB', options); // "31 May 2025"
+    }
+
+function formatTime(timestamp, timezoneOffset) {
+    // Convert to milliseconds and adjust for timezone
+    const localTime = new Date((timestamp + timezoneOffset) * 1000);
+    
+    const options = {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+        timeZone: 'UTC' // Interpret adjusted time as UTC to prevent browser local offset
+    };
+    
+    return localTime.toLocaleTimeString('en-GB', options); // e.g. "02:30 PM"
+}
+
+
+    function updateAQIText(aqiValue) {
+    const aqiMap = {
+        1: { text: "GOOD", color: "green" },
+        2: { text: "FAIR", color: "blue" },
+        3: { text: "MODERATE", color: "orange" },
+        4: { text: "POOR", color: "red" },
+        5: { text: "VERY POOR", color: "purple" }
+    };
+
+    const aqi = aqiMap[aqiValue] || { text: "UNKNOWN", color: "black" };
+
+    const span = document.getElementById("aq");
+    span.innerText = aqi.text;
+    span.style.color = aqi.color;
+}
+
+    async function fetchAQIData(lat, lon){
+        let reqAQI= await fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=6e6b73d1328867022c42ce3fe6faacc3`);
+        let formattedAQI= await reqAQI.json();
+        let list= formattedAQI.list[0].components;
+        $('#pm2')[0].innerText= list.pm2_5;
+        $('#pm10')[0].innerText= list.pm10;
+        $('#co')[0].innerText= list.co;
+        $('#so2')[0].innerText= list.so2;
+        $('#no2')[0].innerText= list.no2;
+        $('#o3')[0].innerText= list.o3;
+        let aqiValue = formattedAQI.list[0].main.aqi;
+        updateAQIText(aqiValue);
+    }
+    async function fetchAQIVal(city){
+      const aqiKey = 'db42769814c53ff583b80bfcc9c5ba2961c023c7';
+      const a = await fetch(`https://api.waqi.info/feed/${city}/?token=${aqiKey}`).then(r => r.json());
+       if (a.status === 'ok') {
+        const val = a.data.aqi;
+        document.getElementById('aqi_val').textContent = val;
+       }
+    }
+
+async function renderWeatherForecast(lat, lon) {
+  const apiKey = '6e6b73d1328867022c42ce3fe6faacc3'; // Replace with your actual OpenWeather API key
+  const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+  try {
+    const res = await fetch(apiUrl);
+    const data = await res.json();
+
+    const forecastContainer = document.getElementById("forecastContainer");
+    forecastContainer.innerHTML = "";
+
+    const dailyForecast = {};
+
+    // Group forecast items by date
+    data.list.forEach(item => {
+      const dateStr = item.dt_txt.split(" ")[0];
+      if (!dailyForecast[dateStr]) dailyForecast[dateStr] = [];
+      dailyForecast[dateStr].push(item);
+    });
+
+    // Process only the next 5 days
+    const entries = Object.entries(dailyForecast).slice(0, 5);
+
+    entries.forEach(([date, items]) => {
+      const weekday = new Date(date).toLocaleDateString("en-US", { weekday: "long" });
+      const formattedDate = new Date(date).toLocaleDateString("en-GB"); // DD/MM/YYYY
+
+      const noonItem = items.find(i => i.dt_txt.includes("09:00:00")) || items[0];
+      const temp = Math.round(noonItem.main.temp);
+      const icon = `https://openweathermap.org/img/wn/${noonItem.weather[0].icon}.png`;
+
+      // Daily rain total and max probability
+      const totalRain = items.reduce((sum, i) => sum + (i.rain?.["3h"] || 0), 0);
+      const maxPop = Math.max(...items.map(i => i.pop || 0));
+      const rainProb = Math.round(maxPop * 100);
+
+      const rainText = totalRain > 0
+        ? `Rain: (${rainProb}%)`
+        : `No rain (${rainProb}%)`;
+
+      // Inject into HTML
+      forecastContainer.innerHTML += `
+        <div class="forecastRow d-flex align-items-center justify-content-between">
+          <!-- Day and Date -->
+          <div class="d-flex flex-column text-start" style="width: 100px;">
+            <h6 class="mb-0">${weekday}</h6>
+            <small class="text-muted">${formattedDate}</small>
+          </div>
+
+          <!-- Icon and Rain Info -->
+          <div class="d-flex align-items-center gap-2" style="width: 160px;">
+            <img src="${icon}" alt="${noonItem.weather[0].description}" width="25px">
+            <small class="text-muted">${rainText}</small>
+          </div>
+
+          <!-- Temperature -->
+          <div class="text-end" style="width: 60px;">
+            <h6 class="mb-0">${temp} &deg;C</h6>
+          </div>
+        </div>
+      `;
+    });
+
+  } catch (err) {
+    console.error("Failed to fetch forecast:", err);
+  }
+}
+
+
+
+async function HourlyForecast(lat, lon) {
+  const apiKey = '6e6b73d1328867022c42ce3fe6faacc3';
+  const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+  try {
+    const res = await fetch(apiUrl);
+    const data = await res.json();
+
+    const container = document.querySelector(".todayTempParent");
+    container.innerHTML = "";
+
+    const next18Hours = data.list.slice(0, 8); // 6 entries = next 18 hours
+
+    next18Hours.forEach(item => {
+      const date = new Date(item.dt * 1000);
+      const hour = date.toLocaleTimeString([], { hour: 'numeric', hour12: true }); // e.g. 3 AM
+      const temp = Math.round(item.main.temp);
+      const icon = `https://openweathermap.org/img/wn/${item.weather[0].icon}.png`;
+
+      container.innerHTML += `
+        <div class="todayTemp text-center">
+          <h6>${hour}</h6>
+          <img src="${icon}" alt="${item.weather[0].description}" width="30px">
+          <h6>${temp} &deg;C</h6>
+        </div>
+      `;
+    });
+
+  } catch (err) {
+    console.error("Failed to fetch 18-hour forecast:", err);
+  }
+}
+
+
+
+function updateWeatherBackground(weatherMain, weatherDescription, iconCode) {
+    const isNight = iconCode.endsWith('n');
+
+    const backgroundMap = {
+        Clear: isNight ? 'night_clear.jpg' : 'day_sunny.jpg',
+        Clouds: {
+            'few clouds': isNight ? 'night_partly_cloudy.jpg' : 'day_partly_cloudy.jpg',
+            'scattered clouds': isNight ? 'night_periodic_clouds.jpg' : 'day_periodic_cloudy.jpeg',
+            'broken clouds': isNight ? 'night_cloudy.jpg' : 'day_partly_cloudy.jpg',
+            'overcast clouds': isNight? 'night_mostly_cloudy.jpg' : 'day_mostly_cloudy.jpg'  // same for day & night
+        },
+        Rain: {
+            'light rain': 'rain_light.jpg',
+            'moderate rain': 'rain.jpg',
+            'heavy intensity rain': 'rain_heavy.jpg'
+        },
+        Drizzle: 'rain_light.jpg',
+        Thunderstorm: 'thunderstorm.jpeg',
+        Snow: 'snow.jpg',
+        Mist: 'fog.jpg',
+        Smoke: 'fog.jpg',
+        Haze: 'fog.jpg',
+        Fog: 'fog.jpg',
+        Dust: 'fog.jpg',
+        Sand: 'fog.jpg'
+    };
+
+    let backgroundImage = 'day_clear.jpg'; // fallback
+
+    if (typeof backgroundMap[weatherMain] === 'string') {
+        backgroundImage = backgroundMap[weatherMain];
+    } else if (typeof backgroundMap[weatherMain] === 'object' && backgroundMap[weatherMain][weatherDescription]) {
+        backgroundImage = backgroundMap[weatherMain][weatherDescription];
+    }
+
+    let currTempBg= document.querySelector('.currTemp');
+
+    // currTempBg.style.backgroundImage= `url('./images/${backgroundImage}')`;
+    currTempBg.style.backgroundImage = `url('/static/images/${backgroundImage}')`;
+
+
+    if(isNight){
+        currTempBg.style.color= '#f6fff8';
+    }
+    else if (
+    weatherMain === 'Rain' ||
+    weatherMain === 'Drizzle' ||
+    weatherMain === 'Thunderstorm') {
+        currTempBg.style.color = '#f6fff8';
+    }
+    else if(weatherDescription==='overcast clouds' || weatherDescription=== 'scattered clouds'){
+        currTempBg.style.color= '#f6fff8';
+    }
+    else{
+        currTempBg.style.color= '#13315c';
+    }
+    
+    
+}
+
+
+
+
+
+    async function fetchData(defaultCity){
+        let cityName= defaultCity|| document.getElementsByClassName('inputfield')[0].value;
+        console.log(cityName);
+        // alert('Fetching data');
+        let requestData= await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=6e6b73d1328867022c42ce3fe6faacc3&units=metric`);
+        let formattedData= await requestData.json();
+        console.log(formattedData);
+
+        let responseCity= formattedData.name;
+        let responseTemp= formattedData.main.temp;
+        let skyDescription= formattedData.weather[0].description;
+
+        $('#cityName')[0].innerText= responseCity;
+        $('#cityTemp')[0].innerText= responseTemp ;
+        $('#skyDesc')[0].innerText= skyDescription;
+        
+        const date = formatDate(formattedData.dt);
+        // const time = formatTime(formattedData.dt);
+
+
+        const timezone = formattedData.timezone;
+
+        const time = formatTime(formattedData.dt, timezone);
+        $('#time')[0].innerText = time;
+
+        const sunriseTime = formatTime(formattedData.sys.sunrise, timezone);
+        const sunsetTime = formatTime(formattedData.sys.sunset, timezone);
+        $('#srTime')[0].innerText = sunriseTime;
+        $('#ssTime')[0].innerText = sunsetTime;
+
+
+
+
+        $('#date')[0].innerText = date;
+        $('#time')[0].innerText = time;
+
+
+        let longitude= formattedData.coord.lon;
+        let latitude= formattedData.coord.lat;
+
+        fetchAQIData(latitude, longitude);
+        let city_name= formattedData.name;
+        fetchAQIVal(city_name)
+        renderWeatherForecast(latitude, longitude);
+
+
+        let humidity= formattedData.main.humidity;
+        let pressure= formattedData.main.pressure;
+        let feels_like= formattedData.main.feels_like;
+        let wind_speed= Math.ceil(formattedData.wind.speed * 3.6);
+
+        $('#feels')[0].innerText= feels_like;
+        $('#press')[0].innerText= pressure;
+        $('#humid')[0].innerText= humidity;
+        $('#wind')[0].innerText= wind_speed;
+
+        HourlyForecast(latitude, longitude);
+
+        let weatherMain = formattedData.weather[0].main;
+        let weatherDescription = formattedData.weather[0].description;
+        let iconCode = formattedData.weather[0].icon;
+
+        updateWeatherBackground(weatherMain, weatherDescription, iconCode);
+
+
+
+
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+        fetchData("Hyderabad");
+    });
+
+
+
+</script>
+
+</body>
+</html>

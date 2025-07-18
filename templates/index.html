@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    <title>SmartHarvest</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #abff4f, #bce784);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .model-section {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .model-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+        .section-title {
+            color: #2c3e50;
+            border-left: 5px solid #27ae60;
+            padding-left: 15px;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+#cropSection {
+    background: linear-gradient(to right, #e0f7fa, #e0ffe0);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#bdy {
+    background: linear-gradient(to right, #f5fcfd, #f6fff6); /* softer versions of your original colors */
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.title{
+    text-align: center;
+    /* background: linear-gradient(to right, #e0f7fa, #e0ffe0); */
+    padding: 2%;
+    /* font-size: larger; */
+}
+.title h6{
+    font-size: 3rem;
+}
+
+
+
+    .weather-card { 
+        max-width: 100%; 
+        margin: 40px auto;
+        background: linear-gradient(to right, #BBDEFB, #E3F2FD); 
+        border-radius: 20px; 
+        padding: 2rem; 
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    .main-content { 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        flex-wrap: wrap; 
+    }
+    .temp-details { 
+        display: flex; 
+        align-items: center; 
+        gap: 2rem; 
+    }
+    .temperature { 
+        font-size: 4rem; 
+        font-weight:400; 
+    }
+    .details { 
+        font-size: .8rem; 
+    }
+    .aqi { 
+        border-radius: 12px; 
+        padding: 1rem 2rem; 
+        text-align: center; 
+        min-width: 150px; 
+    }
+    .aqi strong { 
+        font-size: 2rem; 
+    }
+    .aqi-badge { 
+        padding: 0.5rem 1rem; 
+        border-radius: 8px; 
+        color: white; 
+    }
+    .aqi-good { background: #2ecc71; }
+    .aqi-moderate { background: #f1c40f; }
+    .aqi-unhealthy { background: #e67e22; }
+    .aqi-hazardous { background: #e74c3c; }
+    .weather-icon { width: 100px; height: 100px; }
+
+
+
+    /* Base styling already included above */
+
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .temp-details {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .aqi {
+    margin-top: 1.5rem;
+    width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .temperature {
+    font-size: 2.5rem;
+  }
+  .weather-icon {
+    width: 80px;
+    height: 80px;
+  }
+  .aqi {
+    padding: 1rem;
+  }
+  .weather-card h3{
+    font-size: 2rem;
+    text-align: center;
+  }
+  #m_temp{
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    align-items: center;
+  }
+  #temp{
+    font-size: 4rem;
+  }
+
+}
+
+@media (max-width: 360px) {
+  .weather-icon {
+    width: 60px;
+    height: 60px;
+  }
+  .temperature {
+    font-size: 2rem;
+  }
+  .details {
+    font-size: 0.9rem;
+  }
+  .aqi strong {
+    font-size: 1.5rem;
+  }
+}
+
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover{
+    text-decoration: none;
+    color: inherit;
+}
+
+        .btn-lg {
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+        }
+        .form-group label {
+            font-weight: 600;
+            color: #34495e;
+        }
+        .result-card {
+            margin-top: 30px;
+            border-left: 5px solid #27ae60;
+            border-radius: 10px;
+            background: #fefefe;
+        }
+        .card-title {
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        .text-success {
+            font-weight: 700;
+        }
+        select.form-control, input.form-control {
+            border-radius: 10px;
+        }
+        .btn-primary, .btn-success {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .btn-primary:hover, .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="title">
+        <h6>SmartHarvest</h6>
+    </div>
+
+<div class="container py-5" id="bdy">
+
+<div class="container">
+
+    <a href="{{ url_for('detailed_weather') }}" >
+  <div class="weather-card">
+    <h3><span id="city-name">City</span> Weather Conditions</h3>
+    <div class="main-content">
+      <div class="temp-details">
+        <img id="weather-icon" class="weather-icon" src="" alt="Icon">
+        <div id="m_temp">
+          <div id="temp" class="temperature">--°C</div>
+          <div class="details">
+            <span id="description">--</span><br>
+            Feels like <span id="feels-like">--°C</span><br>
+            Humidity <span id="humidity">--%</span>
+          </div>
+        </div>
+      </div>
+      <div class="aqi">
+        <div>Air Quality Index</div>
+        <strong id="aqi">--</strong>
+        <div id="aqi-badge" class="aqi-badge">--</div>
+      </div>
+    </div>
+  </div>
+  </a>
+
+
+        
+        <!-- Crop Recommendation Section -->
+        <div class="model-section" id="cropSection">
+            <h2 class="section-title">Crop Recommendation</h2>
+            <form method="POST" action="/">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="Nitrogen">Nitrogen</label>
+                        <input type="number" id="Nitrogen" name="Nitrogen" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="Phosphorus">Phosphorus</label>
+                        <input type="number" id="Phosphorus" name="Phosphorus" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="Potassium">Potassium</label>
+                        <input type="number" id="Potassium" name="Potassium" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="Temperature">Temperature (°C)</label>
+                        <input type="number" id="Temperature" name="Temperature" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="Humidity">Humidity (%)</label>
+                        <input type="number" id="Humidity" name="Humidity" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="pH">Soil pH</label>
+                        <input type="number" id="pH" name="pH" class="form-control" step="0.1" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="Rainfall">Rainfall (mm)</label>
+                        <input type="number" id="Rainfall" name="Rainfall" class="form-control" step="0.1" required>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">Get Recommendation</button>
+                </div>
+            </form>
+            
+            {% if crop_result %}
+            <div class="card result-card">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="{{ url_for('static', filename='images/' + crop_image) }}" class="card-img" alt="{{ crop_result }}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Recommended Crop</h5>
+                            <p class="card-text">{{ crop_result }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Yield Prediction Section -->
+        <div class="model-section" id="cropSection">
+            <h2 class="section-title">Yield Prediction</h2>
+            <form method="POST" action="/">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="yield_N">Nitrogen (N)</label>
+                        <input type="number" id="yield_N" name="yield_N" class="form-control" step="any" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="yield_P">Phosphorus (P)</label>
+                        <input type="number" id="yield_P" name="yield_P" class="form-control" step="any" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="yield_K">Potassium (K)</label>
+                        <input type="number" id="yield_K" name="yield_K" class="form-control" step="any" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="yield_pH">Soil pH</label>
+                        <input type="number" id="yield_pH" name="yield_pH" class="form-control" step="any" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="yield_rainfall">Rainfall (mm)</label>
+                        <input type="number" id="yield_rainfall" name="yield_rainfall" class="form-control" step="any" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="yield_temperature">Temperature (°C)</label>
+                        <input type="number" id="yield_temperature" name="yield_temperature" class="form-control" step="any" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="State_Name">State</label>
+                        <select id="State_Name" name="State_Name" class="form-control" required>
+                            <option>uttar pradesh</option>
+                <option>bihar</option>
+                <option>madhya pradesh</option>
+                <option>karnataka</option>
+                <option>odisha</option>
+                <option>assam</option>
+                <option>rajasthan</option>
+                <option>tamil nadu</option>
+                <option>maharashtra</option>
+                <option>west bengal</option>
+                <option>andhra pradesh</option>
+                <option>chhattisgarh</option>
+                <option>gujarat</option>
+                <option>telangana</option>
+                <option>uttarakhand</option>
+                <option>haryana</option>
+                <option>kerala</option>
+                <option>himachal pradesh</option>
+                <option>nagaland</option>
+                <option>meghalaya</option>
+                <option>punjab</option>
+                <option>jharkhand</option>
+                <option>jammu and kashmir</option>
+                <option>mizoram</option>
+                <option>arunachal pradesh</option>
+                <option>manipur</option>
+                <option>tripura</option>
+                <option>sikkim</option>
+                <option>puducherry</option>
+                <option>dadra and nagar haveli</option>
+                <option>chandigarh</option>
+                <option>andaman and nicobar islands</option>
+                <option>goa</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Crop">Crop</label>
+                        <select id="Crop" name="Crop" class="form-control" required>
+                                <option>rice</option>
+                                <option>maize</option>
+                                <option>wheat</option>
+                                <option>moong</option>
+                                <option>jowar</option>
+                                <option>rapeseed</option>
+                                <option>onion</option>
+                                <option>sesamum</option>
+                                <option>potato</option>
+                                <option>sunflower</option>
+                                <option>barley</option>
+                                <option>cotton</option>
+                                <option>ragi</option>
+                                <option>sweetpotato</option>
+                                <option>horsegram</option>
+                                <option>turmeric</option>
+                                <option>soyabean</option>
+                                <option>garlic</option>
+                                <option>coriander</option>
+                                <option>banana</option>
+                                <option>arecanut</option>
+                                <option>jute</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-success btn-lg">Predict Yield</button>
+                </div>
+            </form>
+
+            {% if yield_result %}
+            <div class="card result-card">
+                <div class="card-body">
+                    <h5 class="card-title">Yield Prediction Result</h5>
+                    <p class="card-text">{{ yield_result }}</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
+
+  <script>
+    async function loadDashboard(city) {
+      const weatherKey = '6e6b73d1328867022c42ce3fe6faacc3';
+      const aqiKey = 'db42769814c53ff583b80bfcc9c5ba2961c023c7';
+
+      const w = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${weatherKey}`).then(r => r.json());
+      document.getElementById('city-name').textContent = w.name;
+      document.getElementById('temp').textContent = `${Math.round(w.main.temp)}°C`;
+      document.getElementById('feels-like').textContent = `${Math.round(w.main.feels_like)}°C`;
+      document.getElementById('humidity').textContent = `${w.main.humidity}%`;
+      document.getElementById('description').textContent = w.weather[0].description;
+      document.getElementById('weather-icon').src = `https://openweathermap.org/img/wn/${w.weather[0].icon}@2x.png`;
+
+      const a = await fetch(`https://api.waqi.info/feed/${city}/?token=${aqiKey}`).then(r => r.json());
+      const aqiBadge = document.getElementById('aqi-badge');
+      if (a.status === 'ok') {
+        const val = a.data.aqi;
+        document.getElementById('aqi').textContent = val;
+
+        let cls, txt;
+        if (val <= 50) { cls = 'aqi-good'; txt = 'Good'; }
+        else if (val <=100) { cls = 'aqi-moderate'; txt = 'Moderate'; }
+        else if (val <=150) { cls = 'aqi-unhealthy'; txt = 'Unhealthy'; }
+        else { cls = 'aqi-hazardous'; txt = 'Hazardous'; }
+
+        aqiBadge.className = `aqi-badge ${cls}`;
+        aqiBadge.textContent = txt;
+      } else {
+        document.getElementById('aqi').textContent = 'N/A';
+        aqiBadge.textContent = 'Unavailable';
+      }
+    }
+
+    loadDashboard('Hyderabad');
+  </script>
+
+
+</body>
+</html>

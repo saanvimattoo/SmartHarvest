@@ -1,0 +1,357 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+h3,h6,p{
+    padding: 0;
+    margin: 0;
+}
+.searchBar{
+    height: 10vh;
+    background-color:#013a63;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.searchBarBox{
+    width: 50%;
+    position: relative;
+    height: fit-content;
+}
+
+.inputfield{
+    background-color: #2a6f97;
+    width: 100%;
+    padding: 10px;
+    border-radius: 25px;
+    outline: none;
+    border: 1px solid #6b9080;
+    color:#dee2e6;
+}
+.inputfield::placeholder{
+    color: #dee2e6;
+}
+
+.searchIcon{
+    position: absolute;
+    right: 1.3rem;
+    top: 1.3rem;
+
+}
+.searchIcon:hover{
+    cursor: pointer;
+}
+
+.mainContentParent{
+    height: 110vh;
+    flex-direction: row;
+    background-color: #abc4ff;
+
+    
+}
+
+.left{
+    width: 30%;
+    height: 100%;
+    /* border: 5px solid red; */
+    display: flex;
+    flex-direction: column;
+}
+
+.temp{
+    /* background-color: white; */
+    
+    height: fit-content;
+    margin: auto;
+    border-radius: 15px;
+}
+
+.currTemp{
+    width: 85%;
+    /* background-color: #D7E3FC; */
+    /* color: #dee2e6; */
+    background-size: cover;
+    background-position: center;
+}
+
+
+.nextTemp{
+
+    background-color: #C1D3FE;
+    width: 85%;
+    height: fit-content;
+}
+
+.right{
+    width: 70%;
+    height: 100%;
+    /* border: 5px solid green; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.rightRow{
+    /* border: 3px solid blue; */
+    width: 100%;
+}
+
+.rowOne{
+    height: 20%;
+    /* background-color: lavender; */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    
+}
+
+.rowOneChild{
+    padding: 2% 2%;
+    height: 80%;
+    width: 22%;
+    border-radius: 15px;
+    background-color:#D7E3FC;
+    /* color: #dee2e6; */
+    /* border: 3px solid yellow; */
+}
+
+.rowTwo{
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    /* background-color: wheat;    */
+}
+
+.rowTwoChild{
+    /* border: 3px solid purple; */
+    background-color: white;
+    border-radius: 15px;
+    height: 95%;
+}
+
+/* .aqi{
+    display: flex;
+    flex-direction: column;
+} */
+
+#r2c1{
+    width: 80%;
+    padding:2% 3%;
+    background-color: #d7e3fc;
+    /* color: #eaf4f4; */
+}
+
+#r2c2{
+    width: 18%;
+    padding:2% 1%;
+    background-color: #d7e3fc;
+    
+}
+
+.aqirow{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    
+}
+
+.pollutant{
+    width: 30%;
+    display: flex;
+    justify-content:space-between; 
+    /* align-items: center; */
+    padding: 1%;
+    border-radius: 10px;
+    /* border-left: 2px solid #03045e; */
+}
+
+.pollutant:hover{
+    /* border:1px solid #03045e; */
+    border-radius: 5px;
+    background-color:lightcyan;
+}
+
+.pol{
+    display: flex;
+    /* gap: .rem; */
+}
+
+.polName h6{
+    font-size: smaller;
+}
+
+.polValue h6{
+    font-size:small;
+}
+
+.rowThree{
+    border-radius: 15px;
+    height: 27%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color:#d7e3fc;
+}
+
+.todayTemp{
+    /* border: 2px solid greenyellow; */
+    background-color: #C1D3FE;
+    /* color: #dee2e6; */
+    border-radius: 15px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .3rem;
+    padding: 2% 2%;
+}
+
+.todayTempParent{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+
+
+@media only screen and (max-width: 767px) {
+
+
+    .left{
+        align-items: center;
+        width: 95%;
+        gap: 2rem;
+        margin: 1rem;
+    }
+    .right{
+        width: 100%;
+        gap: 2rem;
+    }
+    .mainContentParent{
+        height: fit-content;
+        flex-direction: column;
+        
+    }
+
+    .searchBar{
+        width: 100%;
+        padding: 2%;
+    }
+    .searchBarBox{
+        width: 90%;
+    }
+
+    .temp{
+        height: 70%;
+        width: 85%;
+    }
+
+    /* .currTemp{
+        display: flex;
+        align-items: center;
+    } */
+
+    .rowOne{
+        flex-wrap: wrap;
+        width: 85%;
+        margin: auto;
+        /* margin-bottom: 2rem; */
+    }
+
+    .rowOneChild{
+        padding: 4%;
+        margin-bottom: 1rem;
+        width: 45%;
+
+    }
+
+    .rowTwo{
+        width: 85%;
+        flex-direction: column;
+        gap: 2rem;
+        height: fit-content;
+    }
+    .rowTwoChild{
+        width: 100%;
+        height: fit-content;
+    }
+
+    #r2c1{
+        padding: 2%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        height: fit-content;
+    }
+    .airquality{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items:start;
+        gap: 1rem;
+    }
+    .aqirow{
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+        gap: 1rem;
+    }
+
+    .pollutant{
+        width: 60%;
+        display: flex;
+        /* justify-content: space-between; */
+    }
+
+    .pol{
+        display: flex;
+    }
+
+    #r2c2{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        padding: 4%;
+    }
+
+    #srss{
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+    }
+
+
+    .rowThree{
+        width: 85%;
+        padding: 2%;
+    }
+    
+
+    /* .todayTempParent{
+        width: 100%;
+        flex-wrap: wrap;
+        margin: auto;
+    } */
+
+    .todayTempParent {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        
+    }
+
+    .todayTemp {
+        margin: 2%;
+        min-height: 130px;
+        min-width: 90px;
+        flex: 0 0 auto;
+    }
+    
+
+}
