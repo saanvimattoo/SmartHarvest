@@ -104,12 +104,6 @@ Try it out live — no installation needed!
 
 ---
 
-## 📸 Screenshots
-
-> *(Add screenshots of your crop recommendation form, weather dashboard, and yield output here)*
-
----
-
 ## 🌱 Future Scope
 
 - 📱 Mobile app version for farmers
