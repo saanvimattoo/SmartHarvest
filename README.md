@@ -113,19 +113,6 @@ Try it out live — no installation needed!
 
 ---
 
-## 👩‍💻 Built By
-
-**Saanvi Mattoo** – ML Engineer & Fullstack Developer  
-*(Collaborated with peers as part of an industrial-oriented mini project)*
-
----
-
-## 📬 Contact
-
-[GitHub – @saanvimattoo](https://github.com/saanvimattoo)
-
----
-
 ## 📄 References
 
 - OpenWeatherMap API – [https://openweathermap.org/api](https://openweathermap.org/api)  
